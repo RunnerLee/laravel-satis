@@ -17,7 +17,7 @@ class CreateRepositoriesTable extends Migration
             $table->increments('id');
             $table->string('name', 100);
             $table->string('url', 2038);
-            $table->timestamp('build_at');
+            $table->timestamp('last_build_at');
             $table->timestamps();
         });
     }

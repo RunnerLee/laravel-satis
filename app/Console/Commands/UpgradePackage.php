@@ -50,8 +50,14 @@ class UpgradePackage extends Command
         $process = new Process($command, app()->basePath());
 
         $process->run();
+
+        $repository->updateLastBuildTime();
     }
 
+    /**
+     * @param $url
+     * @return Repository
+     */
     public function getRepository($url)
     {
         if (!$repository = Repository::byUrl($url)->first()) {
@@ -64,6 +70,10 @@ class UpgradePackage extends Command
         return $repository;
     }
 
+    /**
+     * @param $url
+     * @return bool|string
+     */
     protected function getRepositoryPackageNameIfComposerExists($url)
     {
         $io = new ConsoleIO($this->input, $this->output, $this->getHelperSet());
@@ -88,6 +98,11 @@ class UpgradePackage extends Command
         return $composerConfig['name'];
     }
 
+    /**
+     * @param $url
+     * @param $packageName
+     * @return Repository
+     */
     protected function storeRepositoryAndFlushSatisConfig($url, $packageName)
     {
         $repository = Repository::create([
