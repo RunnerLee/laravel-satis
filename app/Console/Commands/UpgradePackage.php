@@ -44,7 +44,7 @@ class UpgradePackage extends Command
 
         $command = "{$php} vendor/bin/satis build "
             . storage_path('satis/satis.json')
-            . ' ' . public_path('packagist/')
+            . ' ' . public_path()
             . ' ' . $repository->name;
 
         $process = new Process($command, app()->basePath());
