@@ -11,4 +11,4 @@
 |
 */
 
-Route::post('/hook', 'HookController@gitlab');
+Route::post('/hook/{type?}', 'HookController@hook');
